@@ -1,5 +1,6 @@
 import 'package:brasileirao/controller/home_controller.dart';
 import 'package:brasileirao/model/time.dart';
+import 'package:brasileirao/pages/time_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -24,12 +25,15 @@ class _HomePageState extends State<HomePage> {
           centerTitle: true,
         ),
         body: ListView.separated(
-            itemBuilder: (BuildContext contexto, int i) {
+            itemBuilder: (BuildContext contexto, int time) {
               final List<Time> tabela = controller.tabela;
               return ListTile(
-                leading: Image.network(tabela[i].brasao),
-                title: Text(tabela[i].nome),
-                trailing: Text(tabela[i].pontos.toString()),
+                onTap: (){
+                  Navigator.push(contexto, MaterialPageRoute(builder: (_) => TimePage(key: Key(tabela[time].nome), time: tabela[time],)));
+                },
+                leading: Image.network(tabela[time].brasao),
+                title: Text(tabela[time].nome),
+                trailing: Text(tabela[time].pontos.toString()),
               );
             },
             separatorBuilder: (_, __) => Divider(),
