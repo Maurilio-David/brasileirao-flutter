@@ -1,4 +1,5 @@
 import 'package:brasileirao/controller/home_controller.dart';
+import 'package:brasileirao/controller/theme_controller.dart';
 import 'package:brasileirao/model/time.dart';
 import 'package:brasileirao/pages/time_page.dart';
 import 'package:brasileirao/repositories/times_repository.dart';
@@ -13,13 +14,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  var controller = HomeController();
-
-  @override
-  void initState() {
-    super.initState();
-    controller = HomeController();
-  }
+  var controller = ThemeController.to;
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +22,22 @@ class _HomePageState extends State<HomePage> {
         appBar: AppBar(
           title: Text('Brasileirão'),
           centerTitle: true,
+          actions: [
+            PopupMenuButton(
+                icon: Icon(Icons.more_vert),
+                itemBuilder: (_) => [
+                      PopupMenuItem(
+                          child: ListTile(
+                        leading: Obx(() => controller.isDark.value
+                            ? Icon(Icons.brightness_7)
+                            : Icon(Icons.brightness_2)),
+                        title: Obx(() => controller.isDark.value
+                            ? Text('Light')
+                            : Text('Dark')),
+                        onTap: () => controller.changeTheme(),
+                      ))
+                    ])
+          ],
         ),
         body: Consumer<TimesRepository>(builder: (context, repositorio, child) {
           return ListView.separated(
