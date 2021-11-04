@@ -1,7 +1,10 @@
 import 'package:brasileirao/model/time.dart';
 import 'package:brasileirao/model/titulo.dart';
+import 'package:brasileirao/pages/edit_titulo_page.dart';
 import 'package:brasileirao/repositories/times_repository.dart';
+import 'package:brasileirao/widget/brasao.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 import 'add_titulo_page.dart';
@@ -16,12 +19,7 @@ class TimePage extends StatefulWidget {
 
 class _TimePageState extends State<TimePage> {
   tituloPage() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (_) => AddTituloPage(time: widget.time),
-      ),
-    );
+    Get.to(() => AddTituloPage(time: widget.time));
   }
 
   @override
@@ -53,8 +51,10 @@ class _TimePageState extends State<TimePage> {
             children: [
               Padding(
                 padding: EdgeInsets.all(24),
-                child: Image.network(
-                    widget.time.brasao.replaceAll("40x40", "100x100")),
+                child: Brasao(
+                  image: widget.time.brasao,
+                  width: 250,
+                ),
               ),
               Text(
                 'Pontos: ${widget.time.pontos}',
@@ -74,6 +74,7 @@ class _TimePageState extends State<TimePage> {
         .firstWhere((t) => t.nome == widget.time.nome);
 
     final quantidade = time.titulos.length;
+
     return quantidade == 0
         ? Container(
             child: Center(
@@ -86,6 +87,12 @@ class _TimePageState extends State<TimePage> {
                 leading: Icon(Icons.emoji_events),
                 title: Text(time.titulos[index].campeonato),
                 trailing: Text(time.titulos[index].ano),
+                onTap: () {
+                  Get.to(
+                    EditTituloPage(titulo: time.titulos[index]),
+                    fullscreenDialog: true,
+                  );
+                },
               );
             },
             separatorBuilder: (_, __) => Divider(),
