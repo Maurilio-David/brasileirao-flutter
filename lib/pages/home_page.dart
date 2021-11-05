@@ -43,6 +43,7 @@ class _HomePageState extends State<HomePage> {
           return ListView.separated(
             itemCount: repositorio.times.length,
             itemBuilder: (BuildContext contexto, int time) {
+              print(repositorio.times.length);
               final List<Time> tabela = repositorio.times;
               return ListTile(
                 leading: Brasao(
