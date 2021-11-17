@@ -3,6 +3,7 @@ import 'package:brasileirao/controller/theme_controller.dart';
 import 'package:brasileirao/model/time.dart';
 import 'package:brasileirao/pages/time_page.dart';
 import 'package:brasileirao/repositories/times_repository.dart';
+import 'package:brasileirao/services/auth_service.dart';
 import 'package:brasileirao/widget/brasao.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -35,8 +36,16 @@ class _HomePageState extends State<HomePage> {
                             ? Text('Light')
                             : Text('Dark')),
                         onTap: () => controller.changeTheme(),
-                      ))
-                    ])
+                      )),
+                      PopupMenuItem(
+                          child: ListTile(
+                              leading: Icon(Icons.exit_to_app),
+                              title: Text('Sair'),
+                              onTap: () {
+                                Navigator.pop(context);
+                                AuthService.to.logout();
+                              }))
+                    ]),
           ],
         ),
         body: Consumer<TimesRepository>(builder: (context, repositorio, child) {

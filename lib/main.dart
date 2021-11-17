@@ -1,12 +1,13 @@
 import 'package:brasileirao/controller/theme_controller.dart';
-import 'package:brasileirao/pages/home_page.dart';
 import 'package:brasileirao/repositories/times_repository.dart';
+import 'package:brasileirao/widget/checkauth.dart';
+import 'package:brasileirao/widget/config.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
-void main() {
-  Get.lazyPut<ThemeController>(() => ThemeController());
+void main() async {
+  await initConfigurations();
 
   runApp(ChangeNotifierProvider(
       create: (context) => TimesRepository(), child: MeuAplicativo()));
@@ -35,7 +36,7 @@ class MeuAplicativo extends StatelessWidget {
             primary: Colors.deepPurpleAccent[100],
           ))),
       themeMode: ThemeMode.system,
-      home: HomePage(),
+      home: CheckAuth(),
     );
   }
 }

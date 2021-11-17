@@ -4,8 +4,6 @@ import 'package:brasileirao/model/time.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:brasileirao/model/titulo.dart';
-import 'package:brasileirao/model/time.dart';
-import 'package:get/get_navigation/src/root/parse_route.dart';
 
 class TimesRepository extends ChangeNotifier {
   final List<Time> _times = [];

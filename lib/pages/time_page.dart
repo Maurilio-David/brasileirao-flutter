@@ -1,5 +1,4 @@
 import 'package:brasileirao/model/time.dart';
-import 'package:brasileirao/model/titulo.dart';
 import 'package:brasileirao/pages/edit_titulo_page.dart';
 import 'package:brasileirao/repositories/times_repository.dart';
 import 'package:brasileirao/widget/brasao.dart';
